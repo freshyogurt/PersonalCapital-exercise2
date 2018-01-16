@@ -18,6 +18,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * This class parses http request with single query string to a request understood by AWS Elasticsearch Service.
+ */
 public class ProxyWithStream implements RequestStreamHandler {
     JSONParser parser = new JSONParser();
 
@@ -40,15 +43,15 @@ public class ProxyWithStream implements RequestStreamHandler {
                     String planName = (String)qps.get("planName");
                     esUrl += "PLAN_NAME:\"" + URLEncoder.encode(planName, "UTF-8")+"\"";
                 }
-                if (qps.get("sponsorName") != null) {
+                else if (qps.get("sponsorName") != null) {
                     String sponsorName = (String)qps.get("sponsorName");
                     esUrl += "SPONSOR_DFE_NAME:\"" + URLEncoder.encode(sponsorName, "UTF-8")+"\"";
                 }
-                if (qps.get("sponsorMailState") != null) {
+                else if (qps.get("sponsorMailState") != null) {
                     String sponsorMailState = (String)qps.get("sponsorMailState");
                     esUrl += "SPONS_DFE_MAIL_US_STATE:\"" + URLEncoder.encode(sponsorMailState, "UTF-8")+"\"";
                 }
-                if (qps.get("sponsorLocState") != null) {
+                else if (qps.get("sponsorLocState") != null) {
                     String sponsorLocState = (String)qps.get("sponsorLocState");
                     esUrl += "SPONS_DFE_LOC_US_STATE:\"" + URLEncoder.encode(sponsorLocState, "UTF-8")+"\"";
                 }
