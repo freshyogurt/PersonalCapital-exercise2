@@ -1,3 +1,5 @@
+package com.personalcapital;
+
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -21,7 +23,7 @@ public class csv2json {
         dir.mkdirs();
 
         JsonFactory fac = new JsonFactory();
-        try (BufferedReader in = new BufferedReader(new FileReader("f_5500_2016_latest.csv"));) {
+        try (BufferedReader in = new BufferedReader(new FileReader("f_5500_2016_latest.csv"))) {
             String[] headers = in.readLine().split(",");
             int startID = 1 - MAX_COUNT, nextID = 1, seq = 1;
             while (nextID == startID + MAX_COUNT) {
@@ -38,7 +40,7 @@ public class csv2json {
 
         int id = startID;
         try(JsonGenerator gen = fac.createGenerator(new File("json","data" + seq + ".json"), JsonEncoding.UTF8)
-                .setPrettyPrinter(new MinimalPrettyPrinter(""));) {
+                .setPrettyPrinter(new MinimalPrettyPrinter(""))) {
             //gen.writeStartArray();
             String line;
             while ((line = in.readLine()) != null && (id - startID) < MAX_COUNT) {
